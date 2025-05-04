@@ -18,7 +18,9 @@ export async function launchLecture(lecture) {
 
     let found = false;
     while (new Date() < end) {
-        const result = await execAsync(FIND_IPHONE_SCRIPT + " " + IPHONE_HOSTNAME)
+        const script  = FIND_IPHONE_SCRIPT + " " + IPHONE_HOSTNAME
+        console.log("running script: ", script)
+        const result = await execAsync(script)
         if (result) {
             console.log("found iphone")
             found = true
