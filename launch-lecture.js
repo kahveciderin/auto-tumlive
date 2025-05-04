@@ -2,8 +2,6 @@ import { exec } from 'child_process'
 import { createTumlivePage } from './tumlive-login.js';
 import { sleep, waitUntil } from './sleep.js';
 
-const { IPHONE_HOSTNAME, FIND_IPHONE_SCRIPT, WAKE_SCRIPT } = process.env
-
 const execAsync = (command) => {
     return new Promise((resolve) => {
         exec(command, (error) => {
@@ -14,11 +12,13 @@ const execAsync = (command) => {
 }
 
 export async function launchLecture(lecture) {
+    const { IPHONE_HOSTNAME, FIND_IPHONE_SCRIPT, WAKE_SCRIPT } = process.env
+
     const { end, url } = lecture
 
     let found = false;
     while (new Date() < end) {
-        const script  = FIND_IPHONE_SCRIPT + " " + IPHONE_HOSTNAME
+        const script = FIND_IPHONE_SCRIPT + " " + IPHONE_HOSTNAME
         console.log("running script: ", script)
         const result = await execAsync(script)
         if (result) {

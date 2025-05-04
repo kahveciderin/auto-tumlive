@@ -4,10 +4,10 @@ import fs from "fs";
 import dotenv from 'dotenv';
 
 dotenv.config()
-
 const { LECTURES_FILE } = process.env
 
 export async function runDaily() {
+
     await fetchCalendars()
 
     const lectures = getTodaysLectures()
