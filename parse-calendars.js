@@ -24,8 +24,7 @@ export function getTodaysLectures() {
         })
     ).flat().sort((a, b) => a.start - b.start)
 
-    // todo: remove setDate, that's only for testing
-    const now = new Date().setDate(5)
+    const now = new Date()
     const startOfToday = startOfDay(now)
     const endOfToday = endOfDay(now)
 
