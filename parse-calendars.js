@@ -1,15 +1,10 @@
 import ICAL from "ical.js";
-import fs from "fs";
 import { startOfDay, endOfDay } from "date-fns"
 
 
-export function getTodaysLectures() {
-    const { CALENDARS_DIR } = process.env
-
-    const files = fs.readdirSync(CALENDARS_DIR);
-
-    const lectures = files.map(file => ICAL.parse(
-        fs.readFileSync(`${CALENDARS_DIR}/${file}`, "utf-8"))[2]
+export function getTodaysLectures(calendarData) {
+    const lectures = ICAL.parse(
+        calendarData)[2]
         .filter(v => v[0] === "vevent")
         .map(v => {
             const dataFilter = (label) => {
@@ -21,8 +16,7 @@ export function getTodaysLectures() {
                 end: new Date(dataFilter("dtend")),
                 url: dataFilter("url"),
             }
-        })
-    ).flat().sort((a, b) => a.start - b.start)
+        }).sort((a, b) => a.start - b.start)
 
     const now = new Date()
     const startOfToday = startOfDay(now)
