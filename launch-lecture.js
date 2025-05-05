@@ -43,6 +43,10 @@ export async function launchLecture(lecture) {
 
     await page.goto(url)
 
+    await sleep(10000)
+
+    await page.click(".vjs-big-play-button")
+
     await waitUntil(end)
 
     await browser.close()
