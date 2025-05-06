@@ -48,8 +48,11 @@ export async function launchLecture(lecture) {
     await page.click("[id^=livestream] a[href^=\\/w\\/]")
 
     await sleep(10000)
-
-    await page.click(".vjs-big-play-button")
+    try {
+        await page.click(".vjs-big-play-button")
+    } catch (e) {
+        console.log("could not click play button")
+    }
 
     await waitUntil(end)
 
